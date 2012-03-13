@@ -9,7 +9,7 @@
 * Stable tag: **v1.0.1**
 
 ## 下载
-* [hacklog-package-v1.0.2-beta](https://github.com/ihacklog/hacklog-package/zipball/v1.0.2-beta)
+* [hacklog-package-v1.0.2-beta2](https://github.com/ihacklog/hacklog-package/zipball/v1.0.2-beta2)
 
 ## 概述
 
