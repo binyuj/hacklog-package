@@ -1,7 +1,7 @@
 # Hacklog Package (WordPress 插件增强功能包)
 
 ## Plugin Info
-* Contributors: **ihacklog**
+* Contributors: **荒野无灯**
 * Donate link: [http://ihacklog.com/donate](http://ihacklog.com/donate)
 * Tags: **hacklog,package,misc**
 * Requires at least: **3.3**
