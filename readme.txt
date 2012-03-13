@@ -4,7 +4,7 @@ Donate link: http://ihacklog.com/donate
 Tags: hacklog,package,misc
 Requires at least: 3.3
 Tested up to: 3.3.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 WordPress 插件增强功能包
 

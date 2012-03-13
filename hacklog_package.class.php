@@ -64,10 +64,10 @@ class hacklog_package
 		$current_screen->add_help_tab( array(
 			'id'      => self::TEXTDOMAIN . '-general',
 			'title'   => '概述',
-			'content' => $general
+			'content' => $general,
 		) );
 		
-		// Asian character count
+		//how to
 		$how_to  = '<p>首先，把你用于实现某功能的代码添加到一个新建文件中，如demo.php,这个文件要位于本插件目录下的<code>includes</code>目录下面。</p>';
 		$how_to .= '<p>然后，编辑<code>packages.php</code>文件，按照文件中已有条目的格式，增加一条，';
 		$how_to .= '如：<blockquote style="font-size:16px;font-family:monaco,Consolas;">&apos;demo.php&apos;=&gt;array(&apos;name&apos;=&gt;&apos;演示如何添加代码&apos;,&apos;enable&apos;=&gt;1),</blockquote>。</p>';
@@ -76,9 +76,29 @@ class hacklog_package
 		$current_screen->add_help_tab( array(
 			'id'      => self::TEXTDOMAIN .'-how-to',
 			'title'   => '如何添加新功能',
-			'content' => $how_to
+			'content' => $how_to,
 		) );
 	
+		//standardize
+		$comment_star = '*';
+		$standardize = '<p>所有<strong>全局变量</strong>、<strong>函数名</strong>、<strong>类名</strong>，都要以<code>ihacklog_pkg_</code>开头，此举是为防止因冲突而导致程序运行出错。</p>';
+		$standardize .= '<p><strong>增加配置支持</strong> - 在文件开头处按如下格式增加配置：</p>';
+		$standardize .='
+<pre>
+/'. $comment_star . '========= START CONFIGURE ========'. $comment_star .'/
+<strong>$ihacklog_pkg_</strong>foo = array(
+	\'key\' => \'value\',
+);
+/'. $comment_star .'=========  END  CONFIGURE ========'. $comment_star .'/
+</pre>
+	然后在函数中声明 <code>global <strong>$ihacklog_pkg_</strong>foo;</code> 后引用配置即可。
+		';
+		$current_screen->add_help_tab( array(
+			'id'      => self::TEXTDOMAIN .'-standardize',
+			'title'   => 'package文件编码规范',
+			'content' => $standardize,
+		) );	
+
 		// Contact sidebar
 		$current_screen->set_help_sidebar(
 			'<p><strong>意见、建议和问题？</strong></p>' .

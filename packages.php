@@ -1,9 +1,5 @@
 <?php
-
 /**
- * $Id$
- * $Revision$
- * $Date$
  * @filename packages.php 
  * @encoding UTF-8 
  * @author 荒野无灯 <HuangYeWuDeng, admin@ihacklog.com> 
@@ -11,7 +7,7 @@
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://www.gnu.org/licenses/
  * @datetime Jan 24, 2012  9:35:29 PM
- * @version 1.0
+ * @version 1.0.2
  * @Description
   */
 
