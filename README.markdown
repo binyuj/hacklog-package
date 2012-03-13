@@ -34,7 +34,7 @@
 
 ## Screenshots
 
-![后台截图](ihacklog-SimpleDark/raw/master/hacklog-package.png "Screenshot")
+![后台截图](hacklog-package/raw/master/hacklog-package.png "Screenshot")
 
 
 
