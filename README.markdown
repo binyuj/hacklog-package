@@ -33,10 +33,10 @@
 
 ## package文件编码规范
 
-* 所有全局变量、函数名、类名，都要以**ihacklog_pkg_**开头，此举是为防止因冲突而导致程序运行出错。
+* 所有全局变量、函数名、类名，都要以`ihacklog_pkg_`开头，此举是为防止因冲突而导致程序运行出错。
 * js 文件均放入公共的 **js** 目录下面
 * css 文件均放入公共的 **css** 目录下面
-* 增加配置支持 - 在文件开头处按如下格式增加配置：
+* 增加配置支持 - 在文件开头处按如下格式增加配置,如：
 <pre>
 /*========= START CONFIGURE ========*/
 $ihacklog_pkg_foo = array(
@@ -48,7 +48,7 @@ $ihacklog_pkg_foo = array(
 
 ## 如何在主题中手动引用css或js文件？
 
-url地址应该如这样：
+如这样：
 <pre>
 &lt;link rel="stylesheet" type="text/css" media="screen" href="&lt;?php echo plugins_url('hacklog-package');?&gt;/css/foo.css" /&gt;
 </pre>

@@ -110,7 +110,7 @@ class ihacklog_pkg_Widget_Recent_Comments extends WP_Widget
 				$output .= '<li class="recentcomments">' . get_avatar($comment, 24) .
 						/* translators: comments widget: 1: comment author, 2: post link */
 						get_comment_author_link() . '<span class="object">->says(\'</span><a href="' . esc_url(get_comment_link($comment->comment_ID)) . '" title="on《' . esc_attr(strip_tags(get_the_title($comment->comment_post_ID))) . '》">'
-						. mysubstr(strip_tags($comment->comment_content), 50) . '</a><span class="object">\');</span>' . '</li>';
+						. ihacklog_pkg_substr(strip_tags($comment->comment_content), 50) . '</a><span class="object">\');</span>' . '</li>';
 			}
 		}
 		$output .= '</ul>';
