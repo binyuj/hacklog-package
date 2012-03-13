@@ -1,17 +1,11 @@
 <?php
-
 /**
- * $Id$
- * $Revision$
- * $Date$
  * @filename ajax.php 
  * @encoding UTF-8 
- * @author 荒野无灯 <HuangYeWuDeng, admin@ihacklog.com> 
+ * @author 荒野无灯 <HuangYeWuDeng> 
  * @link http://ihacklog.com 
- * @copyright Copyright (C) 2011 荒野无灯 
+ * @copyright Copyright (C) 2012 荒野无灯 
  * @license http://www.gnu.org/licenses/
- * @datetime Feb 4, 2012  10:48:33 PM
- * @version 1.0
  * @Description
  */
 require dirname(__FILE__) . '/../../../wp-load.php';

@@ -9,14 +9,11 @@
  */
 
 /**
- * $Id: loader.php 482701 2011-12-31 05:54:57Z ihacklog $
- * $Revision: 482701 $
- * $Date: 2011-12-31 13:54:57 +0800 (周六, 31 十二月 2011) $
- * @package Hacklog Remote Attachment
+ * @package Hacklog Package
  * @encoding UTF-8
  * @author 荒野无灯 <HuangYeWuDeng>
  * @link http://ihacklog.com
- * @copyright Copyright (C) 2011 荒野无灯
+ * @copyright Copyright (C) 2012 荒野无灯
  * @license http://www.gnu.org/licenses/
  */
 

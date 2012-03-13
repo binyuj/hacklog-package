@@ -1,5 +1,14 @@
 <?php
 /**
+ * @package Hacklog Package
+ * @encoding UTF-8
+ * @author 荒野无灯 <HuangYeWuDeng>
+ * @link http://ihacklog.com
+ * @copyright Copyright (C) 2012 荒野无灯
+ * @license http://www.gnu.org/licenses/
+ */
+ 
+/**
  * usage: <link rel="stylesheet" type="text/css" media="screen" href="<?php echo plugins_url('hacklog-package');?>/google_fonts_css.php?family=Nova+Square|Nosifer+Caps" />
  */
 //$_GET['family'] = 'Electrolize|Nova+Square|Nosifer+Caps|Marmelad|Spinnaker';
