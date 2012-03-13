@@ -1,6 +1,14 @@
 <?php
-//媒体文件播放支持
-function parseaudio($url, $width = 400, $autostart = 0, $title = '') {
+/**
+ * 媒体文件播放支持
+ * @TODO 清洁代码
+ */
+
+add_action('wp_enqueue_scripts', 'ihacklog_pkg_parsemedia_scripts');
+add_shortcode('media','ihacklog_pkg_parsemedia');
+add_shortcode('audio','ihacklog_pkg_parsemp3');
+
+function ihacklog_pkg_parseaudio($url, $width = 400, $autostart = 0, $title = '') {
 	$ext = strtolower(substr(strrchr($url, '.'), 1, 5));
 	switch($ext) {
 		case 'mp3':	
@@ -32,7 +40,7 @@ function parseaudio($url, $width = 400, $autostart = 0, $title = '') {
 
 
 
-function parseflv($url, $width, $height) {
+function ihacklog_pkg_parseflv($url, $width, $height) {
     $lowerurl = strtolower($url);
     $flv = '';
     if($lowerurl != str_replace(array('player.youku.com/player.php/sid/','tudou.com/v/','player.ku6.com/refer/'), '', $lowerurl)) {
@@ -63,12 +71,12 @@ function parseflv($url, $width, $height) {
 
 
 
-function parsemedia($atts, $content=null) {
+function ihacklog_pkg_parsemedia($atts, $content=null) {
 	global $post;
     extract(shortcode_atts(array('type'=>'swf',"width"=>640,'height'=>400,'autostart'=>0,'audio'=>'','volume'=>80,'size'=>'medium','title'=>'',),$atts)); 
     $width = intval($width) > 800 ? 800 : intval($width);
     $height = intval($height) > 600 ? 600 : intval($height);
-    if($flv = parseflv($content, $width, $height)) {
+    if($flv = ihacklog_pkg_parseflv($content, $width, $height)) {
         return $flv;
     }
         $url = str_replace(array('<', '>'), '', str_replace('\\"', '\"', $content));
@@ -81,7 +89,7 @@ function parsemedia($atts, $content=null) {
 			case 'ram':
 			case 'wav':
 			case 'mid':
-				return parseaudio($url, $width, $autostart, $title);
+				return ihacklog_pkg_parseaudio($url, $width, $autostart, $title);
 			case 'rm':
 			case 'rmvb':
 			case 'rtsp':
@@ -111,19 +119,13 @@ function parsemedia($atts, $content=null) {
 	return;
 }
 
-function parsemp3($atts, $content=null)
+function ihacklog_pkg_parsemp3($atts, $content=null)
 {
     extract(shortcode_atts(array('title'=>'',),$atts)); 
-	return parsemedia(array('type'=>'mp3',"width"=>640,'height'=>400,'autostart'=>0,'title'=>$title),$content);
+	return ihacklog_pkg_parsemedia(array('type'=>'mp3',"width"=>640,'height'=>400,'autostart'=>0,'title'=>$title),$content);
 }
 
-add_shortcode('media','parsemedia');
-add_shortcode('audio','parsemp3');
-
-
-add_action('wp_enqueue_scripts', 'parsemedia_scripts');
-
-function parsemedia_scripts()
+function ihacklog_pkg_parsemedia_scripts()
 {
 	wp_enqueue_script('parsemedia', plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'js/swf.min.js.php' , array() , '2.0');
 }

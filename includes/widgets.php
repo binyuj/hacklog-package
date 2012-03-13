@@ -1,4 +1,14 @@
 <?php 
+/**
+ * @filename widgets.php 
+ * @encoding UTF-8 
+ * @author 荒野无灯 <HuangYeWuDeng> 
+ * @link http://ihacklog.com 
+ * @copyright Copyright (C) 2011 荒野无灯 
+ * @license http://www.gnu.org/licenses/
+ * @Description
+ */
+
 if (!defined('ABSPATH'))
 {
 	header('HTTP/1.1 403 Forbidden', true, 403);
@@ -12,7 +22,7 @@ if (!defined('ABSPATH'))
  * By 荒野无灯　5:07 2011/9/28
  * @see http://codex.wordpress.org/Widgets_API
  */
-class ihacklog_Widget_Recent_Comments extends WP_Widget
+class ihacklog_pkg_Widget_Recent_Comments extends WP_Widget
 {
 
 	function __construct()
@@ -147,7 +157,7 @@ class ihacklog_Widget_Recent_Comments extends WP_Widget
  * By 荒野无灯　5:49 2011/9/28
  *
  */
-class ihacklog_Widget_Popular_Posts extends WP_Widget
+class ihacklog_pkg_Widget_Popular_Posts extends WP_Widget
 {
 
 	function __construct()
@@ -249,11 +259,11 @@ class ihacklog_Widget_Popular_Posts extends WP_Widget
 
 // end class ihacklog_Widget_Popular_Posts
 
-function ihacklog_load_widgets()
+function ihacklog_pkg_load_widgets()
 {
-	register_widget('ihacklog_Widget_Recent_Comments');
-	register_widget('ihacklog_Widget_Popular_Posts');
+	register_widget('ihacklog_pkg_Widget_Recent_Comments');
+	register_widget('ihacklog_pkg_Widget_Popular_Posts');
 }
 
-add_action('widgets_init', 'ihacklog_load_widgets');
+add_action('widgets_init', 'ihacklog_pkg_load_widgets');
 ?>

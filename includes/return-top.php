@@ -1,42 +1,44 @@
 <?php
-
 /**
- * $Id$
- * $Revision$
- * $Date$
  * @filename return-top.php 
  * @encoding UTF-8 
- * @author 荒野无灯 <HuangYeWuDeng, admin@ihacklog.com> 
+ * @author 荒野无灯 <HuangYeWuDeng> 
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://www.gnu.org/licenses/
- * @datetime Jan 24, 2012  8:50:02 PM
- * @version 1.0
  * @Description
+ */
+
+/**
+ * notice: the return top image was taken from WordPress theme by mono-lab .
  */
 if (!defined('ABSPATH'))
 {
 	header('HTTP/1.1 403 Forbidden', true, 403);
 	die('Please do not load this page directly. Thanks!');
 } 
- 	 
-function return_top_html_and_js()
+
+add_action('wp_head', 'ihacklog_pkg_return_top_css');
+add_action('wp_footer', 'ihacklog_pkg_return_top_html_and_js', 999);
+
+function ihacklog_pkg_return_top_html_and_js()
 {
 	echo <<<EOT
 	<div id="return_top">
- <a href="#wrapper" title="Top">&nbsp;</a>
-</div>
+ 		<a href="#wrapper" title="Top">&nbsp;</a>
+	</div>
 EOT;
 	echo '	
-<script type="text/javascript">
-	jQuery(function($) {
-	/*返回顶部*/
-	$("#return_top").click(function(){$("html,body").animate({scrollTop: "0px"}, 500); return false;}); 
+	<script type="text/javascript">
+		jQuery(function($) 
+		{
+			/*返回顶部*/
+			$("#return_top").click(function(){$("html,body").animate({scrollTop: "0px"}, 500); return false;}); 
 		});
-	</script>';
+		</script>';
 }
 
-function return_top_css()
+function ihacklog_pkg_return_top_css()
 {
 	$image_url = plugin_dir_url(HACKLOG_PACKAGE_LOADER) . 'images/return_top.png';
 	echo '
@@ -59,6 +61,3 @@ function return_top_css()
 </style>		
 ';
 }
-
-add_action('wp_head', 'return_top_css');
-add_action('wp_footer', 'return_top_html_and_js', 999);

@@ -1,21 +1,16 @@
 <?php
-
 /**
- * $Id$
- * $Revision$
- * $Date$
  * @filename common-js.php 
  * @encoding UTF-8 
- * @author 荒野无灯 <HuangYeWuDeng, admin@ihacklog.com> 
+ * @author 荒野无灯 <HuangYeWuDeng> 
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://www.gnu.org/licenses/
- * @datetime Jan 26, 2012  8:53:39 PM
- * @version 1.0
  * @Description 向footer添加适用于各个主题的js
   */
+add_action('wp_footer', 'ihacklog_pkg_print_common_js');
 
-function print_common_js()
+function ihacklog_pkg_print_common_js()
 {
 	echo <<<EOT
    <script type="text/javascript">
@@ -36,4 +31,3 @@ $('#wgNotice li a').attr({ target: "_blank" });
 EOT;
 }
 
-add_action('wp_footer', 'print_common_js');

@@ -1,11 +1,36 @@
 <?php
+/**
+ * @filename add_title_icon.php 
+ * @encoding UTF-8 
+ * @author 荒野无灯 <HuangYeWuDeng> 
+ * @link http://ihacklog.com 
+ * @copyright Copyright (C) 2012 荒野无灯 
+ * @license http://www.gnu.org/licenses/
+ * @Description 增加title icon主题支持函数( ihacklog_pkg_the_title_icon ) 和彩色标题支持 
+ */
 if (!defined('ABSPATH'))
 {
 	header('HTTP/1.1 403 Forbidden', true, 403);
 	die('Please do not load this page directly. Thanks!');
 } 
+
+if (is_admin() && basename($_SERVER['SCRIPT_FILENAME']) != 'index.php')
+{
+	add_filter('the_title', 'ihacklog_pkg_random_title_color', 99, 2);
+
+	//&lt;span style=&quot;color: rgb(121, 6, 25);&quot; &gt;最近文章title属性去除HTML标签&lt;/span&gt;
+	function ihacklog_pkg_strip_all_attribute_tags($safe_text, $text)
+	{
+		$safe_text = str_replace(
+				array('&lt;span style=&quot;', '&quot; &gt;', '&lt;/span&gt;'), array('<span style="', '" >', '</span>'), $safe_text);
+		return strip_tags($safe_text);
+	}
+
+	add_filter('attribute_escape', 'ihacklog_pkg_strip_all_attribute_tags', 99, 2);
+}
+
 //////start//////////title icon主题支持函数////////by 荒野无灯///////////////
-function the_title_icon()
+function ihacklog_pkg_the_title_icon()
 {
 	global $post;
 	$icon = '';
@@ -26,11 +51,10 @@ function the_title_icon()
 	}
 	echo $icon;
 }
-
 //////end//////////title icon////////by 荒野无灯///////////////
 
 //random title color 
-function hacklog_random_title_color($title, $id)
+function ihacklog_pkg_random_title_color($title, $id)
 {
 	$id = (int) $id;
 	//16
@@ -60,17 +84,3 @@ function hacklog_random_title_color($title, $id)
 	return '<span ' . $style_color . '>' . $title . '</span>';
 }
 
-if (is_admin() && basename($_SERVER['SCRIPT_FILENAME']) != 'index.php')
-{
-	add_filter('the_title', 'hacklog_random_title_color', 99, 2);
-
-//&lt;span style=&quot;color: rgb(121, 6, 25);&quot; &gt;最近文章title属性去除HTML标签&lt;/span&gt;
-	function strip_all_attribute_tags($safe_text, $text)
-	{
-		$safe_text = str_replace(
-				array('&lt;span style=&quot;', '&quot; &gt;', '&lt;/span&gt;'), array('<span style="', '" >', '</span>'), $safe_text);
-		return strip_tags($safe_text);
-	}
-
-	add_filter('attribute_escape', 'strip_all_attribute_tags', 99, 2);
-}

@@ -1,17 +1,11 @@
 <?php
-
 /**
- * $Id$
- * $Revision$
- * $Date$
  * @filename subscribe-notify.php 
  * @encoding UTF-8 
- * @author 荒野无灯 <HuangYeWuDeng, admin@ihacklog.com> 
+ * @author 荒野无灯 <HuangYeWuDeng> 
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://www.gnu.org/licenses/
- * @datetime Jan 26, 2012  8:46:49 PM
- * @version 1.0
  * @Description 向访问者显示订阅通知
  */
 
@@ -20,14 +14,21 @@ if (!defined('ABSPATH'))
 	header('HTTP/1.1 403 Forbidden', true, 403);
 	die('Please do not load this page directly. Thanks!');
 } 
- 	 
-#################显示订阅通知#########start############
+/*========= START CONFIGURE ========*/
+//订阅地址
+$ihacklog_pkg_subscribe_url = home_url('feed');
+/*=========  END  CONFIGURE ========*/
 
-function show_notify()
+add_action('init', 'ihacklog_pkg_set_notify_cookie');
+add_action('wp_head', 'ihacklog_pkg_subscribe_notify_css');
+add_action('wp_footer', 'ihacklog_pkg_show_notify');
+
+function ihacklog_pkg_show_notify()
 {
+	global $ihacklog_pkg_subscribe_url;
 	/*	 * ************配置开始************* */
 	//订阅地址
-	$subscribe_url = home_url('feed');
+	$subscribe_url = $ihacklog_pkg_subscribe_url;
 	/*	 * ************配置结束************* */
 
 	$show = 0;
@@ -43,28 +44,29 @@ function show_notify()
 		{
 			$show = 1;
 			$ref_url = $url['scheme'] . '://' . $ref_host;
-			$extra_msg = '来自<a href="' . $ref_url . '"  target="_blank">' . $ref_host . '</a>的朋友,';
+			$extra_msg = sprintf('来自<a href="%1$s" target="_blank">%2$s</a>的朋友,', $ref_url , $ref_host);
 		}
 	}
 	if (empty($_COOKIE['notify_cookie']) || $show)
 	{
-		echo '<div id="hellovisitor">' . $extra_msg . '欢迎您 <a href="' . $subscribe_url . '" target="_blank">点击这里</a> 
-	订阅我的博客 o(∩_∩)o ~~~ 
-	<a class="closebox" title="关闭" href="#">x</a> 
-	</div>';
+		echo '<div id="hellovisitor">' . 
+				$extra_msg . '欢迎您 <a href="' . $subscribe_url . '" target="_blank">点击这里</a> 
+				订阅我的博客 o(∩_∩)o ~~~ 
+				<a class="closebox" title="关闭" href="#">x</a> 
+			</div>';
 		echo <<<EOT
-   <script type="text/javascript">
-	jQuery(function($){
-		$('#hellovisitor a.closebox').click(function(){ $('#hellovisitor').slideUp('slow');$('.closebox').css('display','none'); return false;}); 
-});// end jQuery
-</script>
+   		<script type="text/javascript">
+			jQuery(function($){
+				$('#hellovisitor a.closebox').click(function(){ $('#hellovisitor').slideUp('slow');$('.closebox').css('display','none'); return false;}); 
+			});// end jQuery
+		</script>
 EOT;
 	}
 }
 
-add_action('wp_footer', 'show_notify');
 
-function set_notify_cookie()
+
+function ihacklog_pkg_set_notify_cookie()
 {
 	if (is_admin())
 	{
@@ -79,9 +81,9 @@ function set_notify_cookie()
 		setcookie('notify_cookie', md5($_SERVER['REMOTE_ADDR'] . $_SERVER['USER_AGENT']), time() + 3600 * 24 * 30);
 }
 
-add_action('init', 'set_notify_cookie');
 
-function subscribe_notify_css()
+
+function ihacklog_pkg_subscribe_notify_css()
 {
 	echo <<<EOT
    <style type="text/css">
@@ -139,6 +141,4 @@ function subscribe_notify_css()
 EOT;
 }
 
-add_action('wp_head', 'subscribe_notify_css');
-#################显示订阅通知#########end ##############
 

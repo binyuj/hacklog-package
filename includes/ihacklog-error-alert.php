@@ -1,13 +1,24 @@
 <?php
+/**
+ * @filename ihacklog-error-alert.php 
+ * @encoding UTF-8 
+ * @author 荒野无灯 <HuangYeWuDeng> 
+ * @link http://ihacklog.com 
+ * @copyright Copyright (C) 2011 荒野无灯 
+ * @license http://www.gnu.org/licenses/
+ * @Description 错误报告.程序出错时发邮件给站长或显示调试信息。
+ * 配置：在 wp-config.php 中添加接收错误报告的邮箱：
+ *  <code> define('WP_ADMIN_ALERT_EMAIL','USER-NAME@the-domain.com'); </code>
+ */
 if (!defined('ABSPATH'))
 {
 	header('HTTP/1.1 403 Forbidden', true, 403);
 	die('Please do not load this page directly. Thanks!');
 } 	
- /*********START*************ALERT ERROR by 荒野无灯******************************/ 
-add_action('shutdown', 'ihacklog_error_alert');
+
+add_action('shutdown', 'ihacklog_pkg_error_alert');
  
-function ihacklog_error_alert()
+function ihacklog_pkg_error_alert()
  {
          if(is_null($e = error_get_last()) === false )
          {
@@ -58,4 +69,3 @@ function ihacklog_error_alert()
              }
          }
  }
- /*********END****************ALERT ERROR by 荒野无灯******************************/

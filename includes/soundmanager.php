@@ -6,23 +6,18 @@
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://creativecommons.org/licenses/by-nc/2.5/
- * @datetime Aug 9, 2011  1:31:03 PM
- * @version 1.0
  * @Description
  * player from http://www.schillmania.com/projects/soundmanager2/
   */
+add_action('wp_print_styles','ihacklog_pkg_soundmanager2_stylesheets');
+add_action('wp_footer','ihacklog_pkg_soundmanager2_print_footer_js',20);
 	  
-function soundmanager2_stylesheets()
+function ihacklog_pkg_soundmanager2_stylesheets()
 {
 		wp_enqueue_style('soundmanager2', plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'js/soundmanager2/360player.min.css.php', array() , 'v297a-20111220');
 }
-add_action('wp_print_styles','soundmanager2_stylesheets');
-
-
-
-add_action('wp_footer','soundmanager2_print_footer_js',20);
 	
-function soundmanager2_print_footer_js()
+function ihacklog_pkg_soundmanager2_print_footer_js()
 {
 	$js_url = plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'js/soundmanager2/' ;
 	$swf_url = plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'swf/soundmanager2';

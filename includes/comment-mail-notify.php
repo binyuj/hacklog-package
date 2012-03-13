@@ -1,10 +1,21 @@
 <?php
-	
+/*========= START CONFIGURE ========*/
+$ihacklog_pkg_comment_mail_notify = array(
+'139_email' => '', //USER-NAME@139.com ,用于有留言时短信通知
+'admin_notify'=> FALSE, //是否向admin发送回复通知 
+
+);
+/*=========  END  CONFIGURE ========*/
+
+add_action('comment_post', 'ihacklog_pkg_comment_mail_notify');
+add_action('comment_form', 'ihacklog_pkg_add_comment_mail_notify_checkbox');
+
 /* comment_mail_notify v1.0 by willin kan. (有勾選欄, 由訪客決定) */
-function comment_mail_notify($comment_id) 
+function ihacklog_pkg_comment_mail_notify($comment_id) 
 {
+global $ihacklog_pkg_comment_mail_notify;
 /********************配置开始********************/	
-$admin_notify = 0; // admin 要不要收回覆通知 ( '1'=要 ; '0'=不要 )
+$admin_notify = $ihacklog_pkg_comment_mail_notify['admin_notify']; // admin 要不要收回覆通知
 //$admin_email = get_bloginfo ('admin_email'); // $admin_email 可改為你指定的 e-mail.
 $admin_email = get_option('admin_email'); //get_bloginfo('admin_email') 内部实际上调用的是get_option('admin_email')
 /********************配置结束********************/	
@@ -46,26 +57,28 @@ $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset
 
 //有评论被发表时，发信到139邮箱
 ##########################################################
-/*
+
 if($admin_email != $comment_author_email )
 {
-$to='USER-NAME@139.com';
+$to_139_email= $ihacklog_pkg_comment_mail_notify['139_email'];
+if( !empty($to_139_email) )
+{
 $from = "From: \"" . get_option('blogname') . "\" <$admin_email>";
 $subject = trim($comment->comment_author) .'在 [' . get_the_title($comment->comment_post_ID) . '] 留言:';
 $message =trim($comment->comment_content);
 $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
-@wp_mail( $to, $subject, $message, $headers );
+@wp_mail( $to_139_email, $subject, $message, $headers );
 }
-*/
+}
+
 ##########################################################
 
 
 }
-add_action('comment_post', 'comment_mail_notify');
 
 /* 自動加勾選欄 */
-function add_checkbox() {
+function ihacklog_pkg_add_comment_mail_notify_checkbox() {
 	echo '<input style="margin-left:20px;width:20px;" type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked" /><label for="comment_mail_notify">有人回复时邮件通知我</label>';
 }
-add_action('comment_form', 'add_checkbox');
+
 // -- END ---------------------------------------- 

@@ -1,7 +1,16 @@
 <?php
-	if (strpos($_SERVER['REQUEST_URI'], 'post.php') || strpos($_SERVER['REQUEST_URI'], 'post-new.php') || strpos($_SERVER['REQUEST_URI'], 'page-new.php') || strpos($_SERVER['REQUEST_URI'], 'page.php')) 
-{
-		function add_smiley_css()
+	if (strpos($_SERVER['REQUEST_URI'], 'post.php') 
+		|| strpos($_SERVER['REQUEST_URI'], 'post-new.php') 
+		|| strpos($_SERVER['REQUEST_URI'], 'page-new.php') 
+		|| strpos($_SERVER['REQUEST_URI'], 'page.php')
+		) 
+	{
+		
+		add_action('admin_head','ihacklog_pkg_add_smiley_css');
+		add_action('admin_footer','ihacklog_pkg_add_other_tags',99);
+		add_action('admin_print_scripts', 'ihacklog_pkg_my_custom_quicktags');
+
+		function ihacklog_pkg_add_smiley_css()
 		{
 		echo '
 		<style type="text/css">
@@ -13,8 +22,8 @@
 			
 		}
 		
-		add_action('admin_head','add_smiley_css');
-		function ihacklog_add_other_tags()
+		
+		function ihacklog_pkg_add_other_tags()
 		{
 		echo <<<EOT
 		<script type="text/javascript">
@@ -101,10 +110,10 @@
 EOT;
 		}
 		
-	add_action('admin_footer','ihacklog_add_other_tags',99);
+	
 	
 	//add custom edButton
-		function my_custom_quicktags() 
+	function ihacklog_pkg_my_custom_quicktags() 
 	{
 		$suffix_js = SIMPLEDARK_DEBUG ? '.js' : '.min.js.php';
 		wp_enqueue_script(
@@ -113,7 +122,6 @@ EOT;
 			array('quicktags')
 		);
 	}
-	add_action('admin_print_scripts', 'my_custom_quicktags');
 	
-}
+}//end outer if
 		

@@ -1,10 +1,22 @@
 <?php
+/**
+ * @filename url_redirect.php 
+ * @encoding UTF-8 
+ * @author 荒野无灯 <HuangYeWuDeng> 
+ * @link http://ihacklog.com 
+ * @copyright Copyright (C) 2011 荒野无灯 
+ * @license http://www.gnu.org/licenses/
+ * @Description 链接重定向处理 by 荒野无灯
+ */
 if (! defined ( 'ABSPATH' )) {
 	die ( 'What are you doing?' );
 }
-########START########### 链接重定向处理 by 荒野无灯  http://ihacklog.com    ############START#############
 
-function match_links($content)
+/*========= START CONFIGURE ========*/
+$ihacklog_pkg_error_page_url = home_url('/error.html');
+/*=========  END  CONFIGURE ========*/
+
+function ihacklog_pkg_match_links($content)
 {
 	$match = array();
 	preg_match_all("'<\s*a\s.*?href\s*=\s*([\"\'])?(?(1)(.*?)\\1|([^\s\>]+))[^>]*>?(.*?)</a>'isx", $content, $links);
@@ -27,20 +39,20 @@ function match_links($content)
 	return $match;
 }
 
-function add_comment_link_redirect($content='')
+function ihacklog_pkg_add_comment_link_redirect($content='')
 {
-	$l = match_links($content);
+	$l = ihacklog_pkg_match_links($content);
 	if (!isset($l['link']))
 		return $content;
 	$cnt = count($l['link']);
 	for ($i = 0; $i < $cnt; $i++)
 	{
-		if (0 === strpos($l['link'][$i], 'http://ihacklog.com/l.php'))
+		if (0 === strpos($l['link'][$i], home_url('/l.php') ) )
 		{
-			$rep[] = get_option('home') . '/l.php?url=' . rawurlencode(str_replace('http://ihacklog.com/l.php?url=', '', str_replace('&#038;', '&', $l['link'][$i])));
+			$rep[] = get_option('home') . '/l.php?url=' . rawurlencode(str_replace(home_url('/l.php?url='), '', str_replace('&#038;', '&', $l['link'][$i])));
 			continue;
 		}
-		if (0 === strpos($l['link'][$i], 'http://ihacklog.com') || 0 === strpos($l['link'][$i], '#'))
+		if (0 === strpos($l['link'][$i], home_url() ) || 0 === strpos($l['link'][$i], '#'))
 		{
 			$rep[] = $l['link'][$i];
 			continue;
@@ -51,35 +63,36 @@ function add_comment_link_redirect($content='')
 	return str_replace($l['link'], $rep, $content);
 }
 
-add_filter('get_comment_author_link', 'add_comment_link_redirect', 5);
-add_filter('comment_text', 'add_comment_link_redirect', 99);
-//add_filter('the_content', 'add_comment_link_redirect', 9);
+add_filter('get_comment_author_link', 'ihacklog_pkg_add_comment_link_redirect', 5);
+add_filter('comment_text', 'ihacklog_pkg_add_comment_link_redirect', 99);
+//add_filter('the_content', 'ihacklog_pkg_add_comment_link_redirect', 9);
 
 
-add_filter('query_vars', 'hacklog_comment_redirect_go_query_vars');
+add_filter('query_vars', 'ihacklog_pkg_comment_redirect_go_query_vars');
 
-function hacklog_comment_redirect_go_query_vars($public_query_vars)
+function ihacklog_pkg_comment_redirect_go_query_vars($public_query_vars)
 {
 	$public_query_vars[] = "hacklog_go_url";
 	return $public_query_vars;
 }
 
-add_filter('generate_rewrite_rules', 'hacklog_comment_redirect_rewrite');
+add_filter('generate_rewrite_rules', 'ihacklog_pkg_comment_redirect_rewrite');
 
-function hacklog_comment_redirect_rewrite($wp_rewrite)
+function ihacklog_pkg_comment_redirect_rewrite($wp_rewrite)
 {
 	$wp_rewrite->rules = array_merge(array('external_link_redirect/(.*)$' => 'index.php?hacklog_go_url=$matches[1]'), $wp_rewrite->rules);
 }
 
-add_action('template_redirect', 'hacklog_comment_redirect_go', 6);
+add_action('template_redirect', 'ihacklog_pkg_comment_redirect_go', 6);
 
-function hacklog_comment_redirect_go()
+function ihacklog_pkg_comment_redirect_go()
 {
+	global $ihacklog_pkg_error_page_url;
 	$url = get_query_var('hacklog_go_url');
-	$errorPage = 'http://ihacklog.com/error.html';
+	$errorPage = $ihacklog_pkg_error_page_url;
 //$home='http://ihacklog.com';
 	$home = $_SERVER['HTTP_HOST'];
-	$refer = empty($_SERVER['HTTP_REFERER']) ? 'http://ihacklog.com' : $_SERVER['HTTP_REFERER'];
+	$refer = empty($_SERVER['HTTP_REFERER']) ? home_url() : $_SERVER['HTTP_REFERER'];
 
 	if (!empty($url))
 	{
@@ -110,7 +123,5 @@ function hacklog_comment_redirect_go()
 		exit();
 	}
 }
-
-######## END ########### 链接重定向处理 by 荒野无灯  http://ihacklog.com    ############ END #############
 
 

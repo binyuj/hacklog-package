@@ -1,10 +1,11 @@
 <?php
 /**
  * 禁用一些wp中很少要用到的功能
- * from http://phoetry.me/archives/disable-useless-functions.html
+ * code mofified from [phoetry] (http://phoetry.me/archives/disable-useless-functions.html)
  * 由荒野无灯修订
  */
-//禁用l10n.js
+
+//前台禁用l10n.js
   !is_admin() && wp_deregister_script('l10n');
   //移除管理员工具条(或:后台也有设置项)
   //add_filter( 'show_admin_bar', '__return_false' );
@@ -33,24 +34,18 @@
   remove_filter('the_title','capital_P_dangit',11);
    */
   //评论跳转链接添加nofollow
-  function nofollow_compopup_link(){
-    return' rel="nofollow"';
-  }
-  add_filter('comments_popup_link_attributes','nofollow_compopup_link');
+  add_filter('comments_popup_link_attributes',create_function('',' return \' rel="nofollow"\'; ') );
+
   /*回复某人链接添加nofollow
   这个理应是原生的, 可是在wp某次改版后被改动了,
   现在是仅当开启注册回复时才有nofollow,否则需要自己手动了*/ 
-  function nofollow_comreply_link($link){
-    return str_replace('<a','<a rel="nofollow"',$link);
-  }
-  get_option('comment_registration')||
-  add_filter('comment_reply_link','nofollow_comreply_link');
+  get_option('comment_registration') || add_filter('comment_reply_link',create_function('$link', 
+    'return str_replace(\'<a\',\'<a rel="nofollow"\',$link); ') );
 
-
-
+add_filter('pings_open','ihacklog_pkg_disable_trackback_recv',999);
 //禁用trackback 接收功能，切断spam来源
 //By 荒野无灯 1:13 2011/9/29
-function disable_trackback_recv( $ping_status )
+function ihacklog_pkg_disable_trackback_recv( $ping_status )
 {
 //is_trackback() 不工作。。。
     if( $GLOBALS['wp_the_query']->query_vars['tb']  )
@@ -63,4 +58,3 @@ function disable_trackback_recv( $ping_status )
     }
 }
 
-add_filter('pings_open','disable_trackback_recv',999);

@@ -1,7 +1,8 @@
 <?php
-	//类似于CMS的分页显示
+//类似于CMS的分页显示函数支持，可在主题中调用
+//function taken from wp pagenavi plugin.
 
-function ihacklog_wp_pagenavi($before = '', $after = '') 
+function ihacklog_pkg_wp_pagenavi($before = '', $after = '') 
 {
 	global $wpdb, $wp_query;
 	if (!is_single()) 
@@ -27,20 +28,7 @@ function ihacklog_wp_pagenavi($before = '', $after = '')
 		);
 		$numposts = $wp_query->found_posts;
 		$max_page = $wp_query->max_num_pages;
-		/*
-		$numposts = 0;
-		if(strpos(get_query_var('tag'), " ")) {
-			preg_match('#^(.*)\sLIMIT#siU', $request, $matches);
-			$fromwhere = $matches[1];			
-			$results = $wpdb->get_results($fromwhere);
-			$numposts = count($results);
-		} else {
-			preg_match('#FROM\s*+(.+?)\s+(GROUP BY|ORDER BY)#si', $request, $matches);
-			$fromwhere = $matches[1];
-			$numposts = $wpdb->get_var("SELECT COUNT(DISTINCT ID) FROM $fromwhere");
-		}
-		$max_page = ceil($numposts/$posts_per_page);
-		*/
+	
 		if(empty($paged) || $paged == 0) {
 			$paged = 1;
 		}

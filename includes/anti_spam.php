@@ -1,20 +1,28 @@
 <?php
+/**
+ * @filename ihacklog-error-alert.php 
+ * @encoding UTF-8 
+ * @author 荒野无灯 <HuangYeWuDeng> , Willin Kan (http://kan.willin.org)
+ * @link http://ihacklog.com 
+ * @copyright Copyright (C) 2012 荒野无灯 
+ * @license http://www.gnu.org/licenses/
+ * @Description 小墙 Anti-Spam v1.9 modified by 荒野无灯。
+ * <<小牆>> Anti-Spam v1.9 by Willin Kan.
+ */
+
 if (! defined ( 'ABSPATH' )) {
 	die ( 'What are you doing?' );
 }
-/* -----------------------------------------------
-  <<小牆>> Anti-Spam v1.9 by Willin Kan.
-  modified by 荒野无灯
- */
 
-//建立
-class anti_spam
+class ihacklog_pkg_anti_spam
 {
 
+/*========= START CONFIGURE ========*/
 	private $anti_spam_field = '';
 	private $no_gravatar_die = TRUE;
 	private $no_chinese_die = TRUE;
 	private $admin_comment_author = '荒野无灯';
+/*=========  END  CONFIGURE ========*/
 
 	public function __construct()
 	{
@@ -205,6 +213,6 @@ class anti_spam
 	}
 
 }
-
-$anti_spam = new anti_spam();
+//run
+new ihacklog_pkg_anti_spam();
 // -- END ----------------------------------------

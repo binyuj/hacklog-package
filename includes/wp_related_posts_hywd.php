@@ -1,8 +1,10 @@
 <?php
-
-#######  START   ##########     显示相关日志    #################    START   #########
-###########################   www.ihacklog.com    ######################################
-$wp_rp = array(
+/**
+ * notice: the replated post function was taken from fairyfish.net 's realted posts plugin
+ */
+ 
+/*========= START CONFIGURE ========*/
+$ihacklog_pkg_rp = array(
 	'limit' => 6, //显示几条相关文章
 	'wp_rp_rss' => true, //在rss feed 中显示相关文章
 	'wp_no_rp' => 'random', //无相关文章时的选择：text 或random （random为显示随机文章)
@@ -10,8 +12,14 @@ $wp_rp = array(
 	'wp_rp_comments' => true, //显示日志评论数
 	'wp_rp_title_tag' => 'h3', //相关日志标题标签(h2 ,h3 ,h4 ,p ,div)
 );
+/*=========  END  CONFIGURE ========*/
 
-function wp_get_random_posts($limitclause="")
+add_filter('the_content', 'ihacklog_pkg_related_posts_hook', 100);
+
+/**
+ * @TODO: optimize the query
+ */
+function ihacklog_pkg_get_random_posts($limitclause="")
 {
 	global $wpdb, $post;
 
@@ -19,11 +27,11 @@ function wp_get_random_posts($limitclause="")
 	return $wpdb->get_results($q);
 }
 
-function wp_get_related_posts()
+function ihacklog_pkg_get_related_posts()
 {
-	global $wpdb, $post, $wp_rp;
-	$limit = $wp_rp["limit"];
-	$wp_rp_title = '相关日志';
+	global $wpdb, $post, $ihacklog_pkg_rp;
+	$limit = $ihacklog_pkg_rp["limit"];
+	$ihacklog_pkg_rp_title = '相关日志';
 	if (!$post->ID)
 	{
 		return;
@@ -59,59 +67,57 @@ function wp_get_related_posts()
 	//不存在相关日志则显示随机日志
 	if (!$related_posts)
 	{
-		if ($wp_rp['wp_no_rp'] == "text")
+		if ($ihacklog_pkg_rp['wp_no_rp'] == "text")
 		{
 			$output .= '<li>无相关日志</li>';
 		}
 		else
 		{
-			if ($wp_rp['wp_no_rp'] == "random")
+			if ($ihacklog_pkg_rp['wp_no_rp'] == "random")
 			{
 				$wp_no_rp_text = '随机日志';
-				$related_posts = wp_get_random_posts($limitclause);
+				$related_posts = ihacklog_pkg_get_random_posts($limitclause);
 			}
 
-			$wp_rp_title = $wp_no_rp_text;
+			$ihacklog_pkg_rp_title = $wp_no_rp_text;
 		}
 	}
 
 	foreach ($related_posts as $related_post)
 	{
 		$output .= '<li>';
-		if ($wp_rp['wp_rp_date'])
+		if ($ihacklog_pkg_rp['wp_rp_date'])
 		{
 			$dateformat = get_option('date_format');
 			$output .= mysql2date($dateformat, $related_post->post_date) . "  //  ";
 		}
 		$output .= '<a href="' . get_permalink($related_post->ID) . '" title="' . wptexturize($related_post->post_title) . '">' . wptexturize($related_post->post_title) . '</a>';
-		if ($wp_rp["wp_rp_comments"])
+		if ($ihacklog_pkg_rp["wp_rp_comments"])
 		{
 			$output .= " (" . $related_post->comment_count . ")";
 		}
 		$output .= '</li>';
 	}
 	$output = '<ul class="related_post">' . $output . '</ul>';
-	$wp_rp_title_tag = $wp_rp["wp_rp_title_tag"];
+	$ihacklog_pkg_rp_title_tag = $ihacklog_pkg_rp["wp_rp_title_tag"];
 
-	if (!$wp_rp_title_tag)
-		$wp_rp_title_tag = 'h3';
-	if ($wp_rp_title != '')
-		$output = '<' . $wp_rp_title_tag . '  class="related_post_title">' . $wp_rp_title . '</' . $wp_rp_title_tag . '>' . $output;
+	if (!$ihacklog_pkg_rp_title_tag)
+		$ihacklog_pkg_rp_title_tag = 'h3';
+	if ($ihacklog_pkg_rp_title != '')
+		$output = '<' . $ihacklog_pkg_rp_title_tag . '  class="related_post_title">' . $ihacklog_pkg_rp_title . '</' . $ihacklog_pkg_rp_title_tag . '>' . $output;
 	return $output;
 }
 
-function wp_related_posts_attach($content)
+function ihacklog_pkg_related_posts_hook($content)
 {
-	global $wp_rp;
-	if (is_single() || (is_feed() && $wp_rp["wp_rp_rss"]))
+	global $ihacklog_pkg_rp;
+	if (is_single() || (is_feed() && $ihacklog_pkg_rp["wp_rp_rss"]))
 	{
-		$output = wp_get_related_posts();
+		$output = ihacklog_pkg_get_related_posts();
 		$content = $content . $output;
 	}
 
 	return $content;
 }
 
-add_filter('the_content', 'wp_related_posts_attach', 100);
-#######    END     ##########     显示相关日志    #################    END   #########
-###########################   www.ihacklog.com    ######################################
+

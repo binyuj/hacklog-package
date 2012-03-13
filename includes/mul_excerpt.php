@@ -1,9 +1,16 @@
 <?php
-	// A trim function to remove the last character of a utf-8 string
+/**
+ * 中英文按字数截断
+ */
+
+add_filter('the_excerpt', 'ihacklog_pkg_mul_excerpt');
+add_filter('the_excerpt_rss', 'ihacklog_pkg_mul_excerpt');
+
+
+// A trim function to remove the last character of a utf-8 string
 // by following instructions on http://en.wikipedia.org/wiki/UTF-8
 // dotann
-
-function utf8_trim($str) {
+function ihacklog_pkg_utf8_trim($str) {
 
 	$len = strlen($str);
 
@@ -16,12 +23,12 @@ function utf8_trim($str) {
 	return($str.$hex);
 }
 
-
 /*
+ * code taken from function mysubstr from internet
  * $sourcestr 是要处理的字符串
  * $cutlength 为截取的长度(即字数)
  */
-function mysubstr($sourcestr,$cutlength)
+function ihacklog_pkg_substr($sourcestr,$cutlength)
 {
 	if(function_exists('mb_substr') )
 	{
@@ -71,10 +78,8 @@ function mysubstr($sourcestr,$cutlength)
 
 }
 
-function mul_excerpt ($excerpt) {
-     $myexcerpt = mysubstr($excerpt,255);
+function ihacklog_pkg_mul_excerpt ($excerpt) {
+     $myexcerpt = ihacklog_pkg_substr($excerpt,255);
 	 return $myexcerpt;
 }
 
-add_filter('the_excerpt', 'mul_excerpt');
-add_filter('the_excerpt_rss', 'mul_excerpt');
