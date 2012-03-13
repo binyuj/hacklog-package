@@ -1,12 +1,12 @@
 # Hacklog Package (WordPress 插件增强功能包)
 
 ## Plugin Info
-Contributors: **ihacklog**
-Donate link: [http://ihacklog.com/donate](http://ihacklog.com/donate)
-Tags: **hacklog,package,misc**
-Requires at least: **3.3**
-Tested up to: **3.3.1**
-Stable tag: **1.0.1**
+* Contributors: **ihacklog**
+* Donate link: [http://ihacklog.com/donate](http://ihacklog.com/donate)
+* Tags: **hacklog,package,misc**
+* Requires at least: **3.3**
+* Tested up to: **3.3.1**
+* Stable tag: **1.0.1**
 
 
 ## Description
@@ -34,7 +34,7 @@ Stable tag: **1.0.1**
 
 ## Screenshots
 
-![后台截图](ihacklog-SimpleDark/raw/master/screenshot-1.png "Screenshot")
+![后台截图](ihacklog-SimpleDark/raw/master/hacklog-package.png "Screenshot")
 
 
 
