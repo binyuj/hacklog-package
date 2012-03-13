@@ -1,0 +1,8 @@
+1.加载jquery库；
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+2.加载Slimbox2.js；
+<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/slimbox2.js"></script>
+3.修改选择器：
+$("#post-content a[rel!=link]:has(img)").slimbox();//修改#post-content为你的主题文章部分ID
+4.把下面的文件夹中css+到主题style.css里面去。
+若出现Bug或者有其他建议请到博客http://icold.me留言

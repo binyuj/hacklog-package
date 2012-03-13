@@ -1,0 +1,13 @@
+/*simbox2*/
+#lbOverlay {position: fixed;z-index: 9999;left: 0;top: 0;width: 100%;height: 100%;cursor: pointer;background-color:#000;}
+#lbCenter, #lbBottomContainer {position: absolute;z-index: 9999;overflow: hidden;background:#868686;background:rgba(255,255,255,0.5);}
+#lbCenter{cursor:pointer;}
+#lbLoading {background:url(images/loading.gif) no-repeat center;display:none}
+#lbImage {position: absolute;left: 0;top: 0;}
+#lbPrevLink,#lbNextLink{display: block;position: absolute;outline: none;width:50px;height:36px;}
+#lbPrevLink{left:10px;}
+#lbNextLink {right:10px;}
+#lbPrevLink:hover,#lbNextLink:hover{text-decoration:underline;}
+#lbBottom {font-weight:bold;height:36px;line-height:36px;text-align:center;background:#868686;background:rgba(255,255,255,0.5);}
+#lbBottom ,#lbBottom a{color:#333;}
+#lbCaption, #lbNumber {width:50px;left:50%;margin-left:-25px;position: absolute;}
