@@ -3,7 +3,7 @@
  Plugin Name: Hacklog Package
  Plugin URI: http://ihacklog.com/?p=5001
  Description: WordPress 插件增强功能包
- Version: 1.0.1
+ Version: 1.0.2
  Author: <a href="http://ihacklog.com/">荒野无灯</a>
  Author URI: http://ihacklog.com/
  */
@@ -21,7 +21,7 @@
  */
 
 /*
- Copyright 2011  荒野无灯
+ Copyright 2012  荒野无灯
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
