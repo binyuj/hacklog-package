@@ -6,10 +6,10 @@
 * Tags: **hacklog,package,misc**
 * Requires at least: **3.3**
 * Tested up to: **3.3.1**
-* Stable tag: **v1.0.1**
+* Stable tag: **v1.0.3**
 
 ## 下载
-* [hacklog-package-v1.0.3-beta](https://github.com/ihacklog/hacklog-package/zipball/v1.0.3-beta)
+* [https://github.com/ihacklog/hacklog-package/downloads](https://github.com/ihacklog/hacklog-package/downloads)
 
 ## 概述
 
