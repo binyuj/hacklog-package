@@ -41,7 +41,7 @@
 * 增加配置支持 - 如需要配置，可在文件开头处按如下格式增加配置,如：
 <pre>
 /*========= START CONFIGURE ========*/
-$GLOBALS['<strong>ihacklog_pkg_</strong>foo'] = array(
+$GLOBALS['ihacklog_pkg_foo'] = array(
 	'key' => 'value',
 );
 /*=========  END  CONFIGURE ========*/
