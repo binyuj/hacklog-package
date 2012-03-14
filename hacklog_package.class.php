@@ -14,7 +14,7 @@ class hacklog_package
 {
 	const TEXTDOMAIN = 'hacklog_package';
 	const PLUGIN_NAME = 'Hacklog Package';
-	const PLUGIN_VERION = '1.0.1';
+	const PLUGIN_VERION = '1.0.3';
 	const OPT = 'hacklog_package_options';
 	private static $_inc_dir = '';
 	

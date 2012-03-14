@@ -2,7 +2,7 @@
 /**
  * @filename infinitescroll.plugin.php 
  * @encoding UTF-8 
- * @author 荒野无灯 <HuangYeWuDeng, admin@ihacklog.com> 
+ * @author 荒野无灯 <HuangYeWuDeng> 
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://creativecommons.org/licenses/by-nc/2.5/
