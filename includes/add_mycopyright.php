@@ -15,7 +15,7 @@ if (!defined('ABSPATH'))
 } 
 
 /*========= START CONFIGURE ========*/
-$ihacklog_pkg_subscribe = array(
+$GLOBALS['ihacklog_pkg_subscribe'] = array(
     //邮件订阅地址
     'email_subscribe_url'=> 'http://list.qq.com/cgi-bin/qf_invite?id=5899d1ae341c4fb741adf6648000fbaf3ef47b98e2a163da',
     'donate_url' => home_url('/donate'),

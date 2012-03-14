@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
 } 
 /*========= START CONFIGURE ========*/
 //订阅地址
-$ihacklog_pkg_subscribe_url = home_url('feed');
+$GLOBALS['ihacklog_pkg_subscribe_url'] = home_url('feed');
 /*=========  END  CONFIGURE ========*/
 
 add_action('init', 'ihacklog_pkg_set_notify_cookie');

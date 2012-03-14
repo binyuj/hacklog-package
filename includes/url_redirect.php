@@ -13,7 +13,7 @@ if (! defined ( 'ABSPATH' )) {
 }
 
 /*========= START CONFIGURE ========*/
-$ihacklog_pkg_error_page_url = home_url('/error.html');
+$GLOBALS['ihacklog_pkg_error_page_url'] = home_url('/error.html');
 /*=========  END  CONFIGURE ========*/
 
 function ihacklog_pkg_match_links($content)

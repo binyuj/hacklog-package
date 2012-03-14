@@ -6,6 +6,7 @@
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2011 荒野无灯 
  * @license http://www.gnu.org/licenses/
+ * @depend on mul_excerpt.php
  * @Description
  */
 

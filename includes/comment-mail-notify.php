@@ -1,6 +1,6 @@
 <?php
 /*========= START CONFIGURE ========*/
-$ihacklog_pkg_comment_mail_notify = array(
+$GLOBALS['ihacklog_pkg_comment_mail_notify'] = array(
 '139_email' => '', //USER-NAME@139.com ,用于有留言时短信通知
 'admin_notify'=> FALSE, //是否向admin发送回复通知 
 

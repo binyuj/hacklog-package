@@ -36,6 +36,6 @@ function ihacklog_pkg_tinybox2_stylesheets()
 
 function ihacklog_pkg_tinybox2_scripts()
 {
-	wp_enqueue_script('tinybox2', plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'js/tinybox2/tinybox2.min.js.php' . $suffix_js, array() , '2.0');
+	wp_enqueue_script('tinybox2', plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'js/tinybox2/tinybox2.min.js.php' , array() , '2.0');
 }
 

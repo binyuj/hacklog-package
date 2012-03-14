@@ -65,7 +65,7 @@ class hacklog_package
 		//how to
 		$how_to  = '<p>首先，把你用于实现某功能的代码添加到一个新建文件中，如demo.php,这个文件要位于本插件目录下的<code>includes</code>目录下面。</p>';
 		$how_to .= '<p>然后，编辑<code>packages.php</code>文件，按照文件中已有条目的格式，增加一条，';
-		$how_to .= '如：<blockquote style="font-size:16px;font-family:monaco,Consolas;">&apos;demo.php&apos;=&gt;array(&apos;name&apos;=&gt;&apos;演示如何添加代码&apos;,&apos;enable&apos;=&gt;1),</blockquote>。</p>';
+		$how_to .= '如：<blockquote style="font-size:16px;font-family:monaco,Consolas;">&apos;demo.php&apos;=&gt;array(&apos;name&apos;=&gt;&apos;演示如何添加代码&apos;,&apos;enable&apos;=&gt;1),</blockquote></p>';
 		$how_to .= '<p><strong>解释</strong> - 第一个参数demo.php是文件名（linux/BSD主机区分大小写）,name对应的值为功能描述，enable表示是否启用，启用此功能。启用则值为1，不启用设置其值为0即可。</p>';
 		
 		$current_screen->add_help_tab( array(
@@ -77,11 +77,14 @@ class hacklog_package
 		//standardize
 		$comment_star = '*';
 		$standardize = '<p>所有<strong>全局变量</strong>、<strong>函数名</strong>、<strong>类名</strong>，都要以<code>ihacklog_pkg_</code>开头，此举是为防止因冲突而导致程序运行出错。</p>';
+		$standardize .= '如：<pre>';
+		$standardize .= '$GLOBALS[\'<strong>ihacklog_pkg_</strong>foo\']';
+		$standardize .= '</pre>';
 		$standardize .= '<p><strong>增加配置支持</strong> - 在文件开头处按如下格式增加配置：</p>';
 		$standardize .='
 <pre>
 /'. $comment_star . '========= START CONFIGURE ========'. $comment_star .'/
-<strong>$ihacklog_pkg_</strong>foo = array(
+$GLOBALS[\'<strong>ihacklog_pkg_</strong>foo\'] = array(
 	\'key\' => \'value\',
 );
 /'. $comment_star .'=========  END  CONFIGURE ========'. $comment_star .'/

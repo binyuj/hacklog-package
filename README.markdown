@@ -9,7 +9,7 @@
 * Stable tag: **v1.0.1**
 
 ## 下载
-* [hacklog-package-v1.0.2-beta2](https://github.com/ihacklog/hacklog-package/zipball/v1.0.2-beta2)
+* [hacklog-package-v1.0.3-beta](https://github.com/ihacklog/hacklog-package/zipball/v1.0.3-beta)
 
 ## 概述
 
@@ -38,10 +38,10 @@
 * 所有放置于**includes**目录下面的文件中的全局变量、函数名、类名，都要以`ihacklog_pkg_`开头，此举是为防止因冲突而导致程序运行出错。
 * js 文件均放入公共的 **js** 目录下面
 * css 文件均放入公共的 **css** 目录下面
-* 增加配置支持 - 在文件开头处按如下格式增加配置,如：
+* 增加配置支持 - 如需要配置，可在文件开头处按如下格式增加配置,如：
 <pre>
 /*========= START CONFIGURE ========*/
-$ihacklog_pkg_foo = array(
+$GLOBALS['<strong>ihacklog_pkg_</strong>foo'] = array(
 	'key' => 'value',
 );
 /*=========  END  CONFIGURE ========*/
@@ -65,8 +65,9 @@ $ihacklog_pkg_foo = array(
 
 ## Installation
 
-1. Upload the whole fold `hacklog-remote-attachment` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+0x01. ensure that the plugin directory was named to `hacklog-package` .
+0x01. Upload the whole fold `hacklog-remote-attachment` to the `/wp-content/plugins/` directory
+0x02. Activate the plugin through the 'Plugins' menu in WordPress
 
 
 ## Screenshots

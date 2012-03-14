@@ -4,7 +4,7 @@
  */
  
 /*========= START CONFIGURE ========*/
-$ihacklog_pkg_rp = array(
+$GLOBALS['ihacklog_pkg_rp'] = array(
 	'limit' => 6, //显示几条相关文章
 	'wp_rp_rss' => true, //在rss feed 中显示相关文章
 	'wp_no_rp' => 'random', //无相关文章时的选择：text 或random （random为显示随机文章)
@@ -36,9 +36,21 @@ function ihacklog_pkg_get_related_posts()
 	{
 		return;
 	}
+
+	
+	if ($limit)
+	{
+		$limitclause = "LIMIT $limit";
+	}
+	else
+	{
+		$limitclause = "LIMIT 10";
+	}
+	$related_posts = '';
 	$now = current_time('mysql', 1);
 	$tags = wp_get_post_tags($post->ID);
-
+if( $tags )
+{
 	$taglist = "'" . $tags[0]->term_id . "'";
 
 	$tagcount = count($tags);
@@ -50,18 +62,10 @@ function ihacklog_pkg_get_related_posts()
 		}
 	}
 
-	if ($limit)
-	{
-		$limitclause = "LIMIT $limit";
-	}
-	else
-	{
-		$limitclause = "LIMIT 10";
-	}
-
 	$q = "SELECT p.ID, p.post_title, p.post_content,p.post_excerpt, p.post_date,  p.comment_count, count(t_r.object_id) as cnt FROM $wpdb->term_taxonomy t_t, $wpdb->term_relationships t_r, $wpdb->posts p WHERE t_t.taxonomy ='post_tag' AND t_t.term_taxonomy_id = t_r.term_taxonomy_id AND t_r.object_id  = p.ID AND (t_t.term_id IN ($taglist)) AND p.ID != $post->ID AND p.post_status = 'publish' AND p.post_date_gmt < '$now' GROUP BY t_r.object_id ORDER BY cnt DESC, p.post_date_gmt DESC $limitclause;";
 
 	$related_posts = $wpdb->get_results($q);
+}
 
 	$output = "";
 	//不存在相关日志则显示随机日志
