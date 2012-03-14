@@ -25,6 +25,7 @@ if (! defined ( 'ABSPATH' )) {
 		'loadingText'=>'正在努力加载中...',
 		'donetext'=>'后面没有啦Orz',
 		'debug'=>'false',
+		'trigger_nextSeletor'=>'',
 	/*=========  END  CONFIGURE ========*/		
 		);
 	
@@ -106,6 +107,20 @@ jQuery(function($) {
                           errorCallback   : function(){}
 });
 	
+	// kill scroll binding
+$(window).unbind('.infscr');
+// hook up the manual click guy.
+$('a#next').click(
+function(){
+$(document).trigger('retrieve.infscr');
+return false;
+});
+// remove the paginator when we're done.
+$(document).ajaxError(function(e,xhr,opt)
+{
+if (xhr.status == 404) 
+	$('{$options['trigger_nextSeletor']}').remove();
+});
 
 });
 </script>
