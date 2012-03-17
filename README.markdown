@@ -6,7 +6,7 @@
 * Tags: **hacklog,package,misc**
 * Requires at least: **3.3**
 * Tested up to: **3.3.1**
-* Stable tag: **v1.0.3**
+* Stable tag: **v1.0.4**
 
 ## 下载
 * [https://github.com/ihacklog/hacklog-package/downloads](https://github.com/ihacklog/hacklog-package/downloads)
@@ -86,6 +86,8 @@ will be added here future
 
 
 ## Changelog
+### 1.0.4
+* updated infinitescroll
 
 ### 1.0.2
 * standardized the code,all gloabal var,class name,function prefixed with `ihacklog_pkg_`

@@ -25,7 +25,8 @@ if (! defined ( 'ABSPATH' )) {
 		'loadingText'=>'正在努力加载中...',
 		'donetext'=>'后面没有啦Orz',
 		'debug'=>'false',
-		'behavior'=>array('twitter','manual-trigger'),
+		//'behavior'=>array('twitter','manual-trigger'),
+		'behavior'=>array('',''),
 	/*=========  END  CONFIGURE ========*/		
 		);
 	
@@ -35,7 +36,7 @@ if (! defined ( 'ABSPATH' )) {
 		add_action('wp_head',array(__CLASS__,'print_css'));
 		add_action('wp_footer',array(__CLASS__,'print_footer_js'),20);		
 //		self::action_plugin_activation();
-//		update_option(__CLASS__,self::$defaultOpts);
+		update_option(__CLASS__,self::$defaultOpts);
 	}
 
 	public static function help()
@@ -94,7 +95,7 @@ jQuery(function($) {
         },
         state : { currPage : "{$current_page}" },
         pathParse: false,
-        debug           : true,
+        debug           : {$options['debug']},
 	 	behavior		: "{$options['behavior'][0]}",
         preload         : true,
         nextSelector    : "{$options['nextSelector']}",
@@ -130,7 +131,7 @@ EOT;
 	 {
 			wp_enqueue_script('jquery.infinitescroll',  plugin_dir_url(HACKLOG_PACKAGE_LOADER).'js/infinite-scroll/jquery.infinitescroll.min.js.php', array('jquery'), '2.0b2.120311', TRUE);
 			$options = get_option(__CLASS__, self::$defaultOpts);
-			wp_enqueue_script('jquery.infinitescroll.' . $options['behavior'][1],  plugin_dir_url(HACKLOG_PACKAGE_LOADER).'js/infinite-scroll/behaviors/'. $options['behavior'][1] . '.min.js.php', array('jquery','jquery.infinitescroll'), '2.0b2.120311', TRUE);
+			!empty($options['behavior'][1]) && wp_enqueue_script('jquery.infinitescroll.' . $options['behavior'][1],  plugin_dir_url(HACKLOG_PACKAGE_LOADER).'js/infinite-scroll/behaviors/'. $options['behavior'][1] . '.min.js.php', array('jquery','jquery.infinitescroll'), '2.0b2.120311', TRUE);
 	 }
 	 public static function print_css()
 	 {
