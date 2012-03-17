@@ -18,14 +18,14 @@ if (! defined ( 'ABSPATH' )) {
 {
 	private static $defaultOpts =array(
 	/*========= START CONFIGURE ========*/	
-		'content_id'=>'content',
-		'nextSelector'=>'div.alignleft a:first', 
+		'content_id'=>'#content',
+		'nextSelector'=>'div.alignleft a:last', 
 		'navSelector'=>'div.navigation',
 		'itemSelector'=>'div.post,div.entries',
 		'loadingText'=>'正在努力加载中...',
 		'donetext'=>'后面没有啦Orz',
 		'debug'=>'false',
-		'trigger_nextSeletor'=>'',
+		'behavior'=>array('twitter','manual-trigger'),
 	/*=========  END  CONFIGURE ========*/		
 		);
 	
@@ -79,48 +79,46 @@ if (! defined ( 'ABSPATH' )) {
 		 $options = get_option(__CLASS__, self::$defaultOpts);
 		 $options['debug'] = 1 == $options['debug'] ? 'true': 'false';
 		 $plg_url = plugin_dir_url(HACKLOG_PACKAGE_LOADER )  ;
+		 $current_page 		= (get_query_var('paged')) ? get_query_var('paged') : 1;
 		 $js = <<<EOT
 		 <script type="text/javascript">
 jQuery(function($) {
-	$("#{$options['content_id']}").infinitescroll(
+	$("{$options['content_id']}").infinitescroll(
 	{
 	  loading: {
-            finished: undefined,
             finishedMsg: "<em>{$options['donetext']}</em>",
             img: "{$plg_url}images/ajax-loader.gif",
             msg: null,
             msgText: "<em>{$options['loadingText']}</em>",
-            selector: null,
-            speed: 'fast',
-            start: undefined
+            speed: 'fast'
         },
-                          debug           : {$options['debug']},
-                          preload         : true,
-                          nextSelector    : "{$options['nextSelector']}",
-                          navSelector     : "{$options['navSelector']}",
-                          contentSelector : null,           // not really a selector. :) it's whatever the method was called on..
-                          extraScrollPx   : 350,
-                          itemSelector    : "{$options['itemSelector']}",
-                          animate         : false,
-                          localMode      : false,
-                          bufferPx        : 40,
-                          errorCallback   : function(){}
-});
-	
-	// kill scroll binding
-$(window).unbind('.infscr');
-// hook up the manual click guy.
-$('a#next').click(
-function(){
-$(document).trigger('retrieve.infscr');
-return false;
-});
-// remove the paginator when we're done.
-$(document).ajaxError(function(e,xhr,opt)
-{
-if (xhr.status == 404) 
-	$('{$options['trigger_nextSeletor']}').remove();
-});
+        state : { currPage : "{$current_page}" },
+        pathParse: false,
+        debug           : true,
+	 	behavior		: "{$options['behavior'][0]}",
+        preload         : true,
+        nextSelector    : "{$options['nextSelector']}",
+        navSelector     : "{$options['navSelector']}",
+        dataType	 	: 'html',
+        appendCallback	: true,
+        extraScrollPx   : 350,
+        itemSelector    : "{$options['itemSelector']}",
+        animate         : false,
+        bufferPx        : 40,
+        errorCallback   : function(){}
+	},
+	function(newElements){
+    
+    	//USE FOR PREPENDING
+    	// $(newElements).css('background-color','#ffef00');
+    	// $(this).prepend(newElements);
+    	//
+    	//END OF PREPENDING
+    	
+    	window.console && console.log('context: ',this);
+    	window.console && console.log('returned: ', newElements);
+    	
+    });
 
 });
 </script>
@@ -130,7 +128,9 @@ EOT;
 	 
 	 public static function register_js()
 	 {
-			wp_enqueue_script('jquery.infinitescroll',  plugin_dir_url(HACKLOG_PACKAGE_LOADER).'js/jquery.infinitescroll.min.js.php', array('jquery'), '1.0', TRUE);
+			wp_enqueue_script('jquery.infinitescroll',  plugin_dir_url(HACKLOG_PACKAGE_LOADER).'js/infinite-scroll/jquery.infinitescroll.min.js.php', array('jquery'), '2.0b2.120311', TRUE);
+			$options = get_option(__CLASS__, self::$defaultOpts);
+			wp_enqueue_script('jquery.infinitescroll.' . $options['behavior'][1],  plugin_dir_url(HACKLOG_PACKAGE_LOADER).'js/infinite-scroll/behaviors/'. $options['behavior'][1] . '.min.js.php', array('jquery','jquery.infinitescroll'), '2.0b2.120311', TRUE);
 	 }
 	 public static function print_css()
 	 {
