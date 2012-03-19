@@ -136,7 +136,7 @@ $GLOBALS[\'<strong>ihacklog_pkg_</strong>foo\'] = array(
 		{
 			add_option(self::OPT, self::get_hacks() );
 		}
-		$hacks = get_option(self::OPT);
+		$hacks = array_merge(get_option(self::OPT), self::get_hacks() );
 		
 		$i = 0;
 			?>

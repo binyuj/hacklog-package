@@ -15,7 +15,7 @@ class ihacklog_pkg_couponcode
 {
 	public static function run()
 	{
-		add_action('wp_print_styles',array(__CLASS__,'ihacklog_pkg_couponcode_stylesheets') );
+		add_action('wp_print_styles',array(__CLASS__,'ihacklog_pkg_couponcode_stylesheets'),999);
 		add_action('wp_enqueue_scripts', array(__CLASS__,'ihacklog_pkg_couponcode_scripts') );
 		add_action('wp_footer', array(__CLASS__,'ihacklog_pkg_couponcode_js') );
 		add_shortcode( "couponcode", array(__CLASS__,'couponcode_shortcode') );
@@ -110,13 +110,13 @@ static function ihacklog_pkg_couponcode_stylesheets()
     padding: 1px 0px 1px 10px;
     margin: 5px;
     position: relative;
-    width: 300px;
+    width: 360px;
     height:25px;
 	  text-decoration: none; 
 	  text-shadow: #0193c3 0 -1px;
 }
 .couponcode a {
-	text-decoration:none;
+	text-decoration:none !important;
 }
 .couponcode:hover{
 	border-color:#000;
