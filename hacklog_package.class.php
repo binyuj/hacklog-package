@@ -6,7 +6,7 @@
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2012 荒野无灯 
  * @license http://www.gnu.org/licenses/
- * @version 1.0.1
+ * @version 1.0.5
  * @Description
   */
 
@@ -14,7 +14,7 @@ class hacklog_package
 {
 	const TEXTDOMAIN = 'hacklog_package';
 	const PLUGIN_NAME = 'Hacklog Package';
-	const PLUGIN_VERION = '1.0.3';
+	const PLUGIN_VERION = '1.0.5';
 	const OPT = 'hacklog_package_options';
 	private static $_inc_dir = '';
 	
