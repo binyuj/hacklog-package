@@ -38,7 +38,7 @@ return array(
 		'subscribe-notify.php'=>array('name'=>'显示订阅通知','enable'=>1),	
 		'infinitescroll.php'=>array('name'=>'无限翻页','enable'=>1),	
 		'soundmanager.php'=>array('name'=>'SoundManager 2 / 360° Player','enable'=>1),
-
+		'couponcode.php'=>array('name'=>'couponcode','enable'=>1),
 	
 	
 	/*******************************配置结束**********************************/
