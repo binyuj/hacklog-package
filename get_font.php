@@ -58,10 +58,7 @@ header($expire_str);
 header('Last-Modified: ' . $last_modified);
 header("Etag: $etag"); 
 /////////////////////////////////////////////////////////////////////////////////////////////
-	
-	header("Content-Type: application/force-download");
-	header("Content-Type: application/octet-stream");
-	header("Content-Type: application/download");
+	header("Content-Type: application/x-font-woff");
 	header('Content-Disposition: attachment; '. basename($font) );
 	header("Content-Transfer-Encoding: binary");
 	header("Content-Length: " . $filesize);
