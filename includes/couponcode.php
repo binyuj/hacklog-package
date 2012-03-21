@@ -136,41 +136,43 @@ static function ihacklog_pkg_couponcode_js()
 	$plugin_dir_url =  plugin_dir_url(HACKLOG_PACKAGE_LOADER ) . 'js/zeroclipboard';
 	echo <<<EOT
 	<script type="text/javascript">
-		// where are we directing to
-        var coupon_direct = "";
-        jQuery(function($) {
+	// where are we directing to
+	var coupon_direct = "";
+	jQuery(function($) 
+	{
 		// ZeroClipboard Setup
-          ZeroClipboard.setMoviePath( "{$plugin_dir_url}/ZeroClipboard.swf" );
-          $('.couponcode').each(function() {
-						var clip = new ZeroClipboard.Client();
-						clip.setHandCursor(true);
-						//clip.toolTip = 'click to copy & see the deal';
-						clip.glue(this, this);
-						var element = $(this);
-						//alert(element);
-						var code = element.find('a').text();
-						//alert( code );
-						clip.toolTip = element.find('a').attr('title');
+		ZeroClipboard.setMoviePath( "{$plugin_dir_url}/ZeroClipboard.swf" );
+		$('.couponcode').each(function()
+		{
+			var clip = new ZeroClipboard.Client();
+			clip.setHandCursor(true);
+			//clip.toolTip = 'click to copy & see the deal';
+			clip.glue(this, this);
+			var element = $(this);
+			//alert(element);
+			var code = element.find('a').text();
+			//alert( code );
+			clip.toolTip = element.find('a').attr('title');
 
-						clip.addEventListener('mouseOver', function(client) {
-							code = element.find('a').text();
-							coupon_direct = element.find('a').attr("href");	
-							//alert( coupon_direct );
-						});	
+			clip.addEventListener('mouseOver', function(client) {
+				code = element.find('a').text();
+				coupon_direct = element.find('a').attr("href");	
+				//alert( coupon_direct );
+			});	
 
- 						clip.addEventListener( 'mouseDown', function(client) {
-                                // set text to copy here
- 								//alert(code);
-                                //alert("mouse down"); 
- 							client.setText( code );
-                        } );
-						clip.addEventListener('complete', function(client, text) {
-							//alert("Copied text to clipboard: " + text );
-							window.location = coupon_direct;
-						});		
-	
-					});//end each
-        });     		
+			clip.addEventListener( 'mouseDown', function(client) {
+					// set text to copy here
+					//alert(code);
+					//alert("mouse down"); 
+				client.setText( code );
+			} );
+			clip.addEventListener('complete', function(client, text) {
+				//alert("Copied text to clipboard: " + text );
+				window.location = coupon_direct;
+			});		
+
+		});//end each
+	});     		
 </script>
 EOT;
 }
