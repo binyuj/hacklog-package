@@ -78,7 +78,7 @@ EOT;
 static function ihacklog_pkg_couponcode_stylesheets()
 {
 	echo <<<EOT
-	<style>
+<style>
 .couponcode-container {
     font-family: Arial,Helvetica,sans-serif;
     font-size: 14px;
@@ -94,14 +94,15 @@ static function ihacklog_pkg_couponcode_stylesheets()
 }
 
 
-.styledButton{background:#2e7694;background:-moz-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#2e7694),color-stop(3%,#60b3d4),color-stop(15%,#60b3d4),color-stop(26%,#3c99c0),color-stop(91%,#2e7694),color-stop(99%,#3c99c0));background:-webkit-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:-o-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:-ms-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e7694',endColorstr='#3c99c0',GradientType=0);zoom:100%;font-size:13px;line-height:11px;font-weight:bold;display:inline-block;*display:inline;color:white!important;padding:4px 8px;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;cursor:pointer;text-decoration:none;border:1px solid #0e67aa;text-shadow:1px 1px 1px rgba(0,0,0,0.35);-webkit-text-shadow:1px 1px 1px rgba(0,0,0,0.35);-moz-text-shadow:1px 1px 1px rgba(0,0,0,0.35);-o-text-shadow:1px 1px 1px rgba(0,0,0,0.35);-ms-text-shadow:1px 1px 1px rgba(0,0,0,0.35);
-  position:absolute;
+.styledButton{
+    background:#2e7694;background:-moz-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#2e7694),color-stop(3%,#60b3d4),color-stop(15%,#60b3d4),color-stop(26%,#3c99c0),color-stop(91%,#2e7694),color-stop(99%,#3c99c0));background:-webkit-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:-o-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:-ms-linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);background:linear-gradient(top,#2e7694 0,#60b3d4 3%,#60b3d4 15%,#3c99c0 26%,#2e7694 91%,#3c99c0 99%);*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e7694',endColorstr='#3c99c0',GradientType=0);zoom:100%;font-size:13px;line-height:11px;font-weight:bold;display:inline-block;*display:inline;color:white!important;padding:4px 8px;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;cursor:pointer;text-decoration:none;border:1px solid #0e67aa;text-shadow:1px 1px 1px rgba(0,0,0,0.35);-webkit-text-shadow:1px 1px 1px rgba(0,0,0,0.35);-moz-text-shadow:1px 1px 1px rgba(0,0,0,0.35);-o-text-shadow:1px 1px 1px rgba(0,0,0,0.35);-ms-text-shadow:1px 1px 1px rgba(0,0,0,0.35);
+    position:absolute;
     right:5px;
     top:3px;
 }
 
 .couponcode { 
-		display: block;
+	display: block;
 	border-radius:3px;
 	background-color: #FDFED2;
     border: 1px dashed #FEBF02;
@@ -111,8 +112,8 @@ static function ihacklog_pkg_couponcode_stylesheets()
     position: relative;
     width: 360px;
     height:25px;
-	  text-decoration: none; 
-	  text-shadow: #0193c3 0 -1px;
+	text-decoration: none; 
+	text-shadow: #0193c3 0 -1px;
 }
 .couponcode a {
 	text-decoration:none !important;
@@ -120,8 +121,7 @@ static function ihacklog_pkg_couponcode_stylesheets()
 .couponcode:hover{
 	border-color:#000;
     background-color: #F5ECC1;
-}
-	
+}	
 </style>
 EOT;
 
