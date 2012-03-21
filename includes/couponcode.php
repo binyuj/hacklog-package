@@ -23,8 +23,7 @@ class ihacklog_pkg_couponcode
 
 /**
  * usage [couponcode code='' caption='' url='' title='']
- * 
- * 
+ * add shortcode support
  */
 static function couponcode_shortcode( $atts ,$content)
 {
