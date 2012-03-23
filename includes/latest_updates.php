@@ -18,7 +18,7 @@ if ( !defined( 'ABSPATH' ) )
 	header( 'HTTP/1.1 403 Forbidden', true, 403 ); die ('Please do not load this page directly. Thanks!'); 
 }
 
-add_action('rss2_head','ihacklog_pkg_rss2_latest_updates',999);
+add_action('rss2_head','ihacklog_pkg_rss2_latest_updates',-99);
 
 
 function ihacklog_pkg_get_latest_updates_for_feed($num=5,$interval = 604800 ) 
@@ -54,20 +54,23 @@ function ihacklog_pkg_rss2_latest_updates()
 	$interval      = 3600 * 24 * $interval_days ;
 	$list          =	ihacklog_pkg_get_latest_updates_for_feed($num,$interval );
 	foreach( $list as $post):
-	setup_postdata($post);?>
+	setup_postdata($post);
+	$update_time = mysql2date('D, d M Y H:i:s +0000', get_post_modified_time('Y-m-d H:i:s', true), false) ;
+	$update_notify = '<p>本文内容已于GMT时间<strong>' . $update_time . '</strong>更新。</p>';
+	?>
 		<item>
-		<title><?php the_title_rss() ?></title>
+		<title><?php the_title_rss();echo '(于GMT时间' . $update_time . '更新)'; ?></title>
 		<link><?php the_permalink_rss() ?></link>
 		<comments><?php comments_link_feed(); ?></comments>
-		<pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
+		<pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_modified_time('Y-m-d H:i:s', true), false); ?></pubDate>
 		<dc:creator><?php the_author() ?></dc:creator>
 		<?php the_category_rss('rss2') ?>
 		<guid isPermaLink="false"><?php the_guid(); ?></guid>
-		<description><![CDATA[<p>本文内容已于GMT时间<strong><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_modified_time('Y-m-d H:i:s', true), false); ?></strong>更新。</p>]]></description>
+		<description><![CDATA[<?php echo $update_notify;?>]]></description>
 	<?php if ( strlen( $post->post_content ) > 0 ) : ?>
-		<content:encoded><![CDATA[<?php the_content_feed('rss2'); ?>]]></content:encoded>
+		<content:encoded><![CDATA[<?php echo $update_notify;?><?php the_content_feed('rss2'); ?>]]></content:encoded>
 	<?php else : ?>
-		<content:encoded><![CDATA[<p>本文内容已于GMT时间<strong><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_modified_time('Y-m-d H:i:s', true), false); ?></strong>更新。</p><?php the_excerpt_rss() ?>]]></content:encoded>
+		<content:encoded><![CDATA[<?php echo $update_notify;?><?php the_excerpt_rss() ?>]]></content:encoded>
 	<?php endif; ?>
 		<wfw:commentRss><?php echo esc_url( get_post_comments_feed_link(null, 'rss2') ); ?></wfw:commentRss>
 		<slash:comments><?php echo get_comments_number(); ?></slash:comments>
