@@ -14,6 +14,10 @@
   //禁用修改历史记录
   remove_action('pre_post_update','wp_save_post_revision');
   //禁止在head泄露wordpress版本号
+  foreach ( array( 'rss2_head', 'commentsrss2_head', 'rss_head', 'rdf_header', 'atom_head', 'comments_atom_head', 'opml_head', 'app_head' ) as $action ) 
+  {
+    remove_action( $action, 'the_generator' );
+  }
   remove_action('wp_head','wp_generator');
   //移除head中的rel="EditURI"
   remove_action('wp_head','rsd_link');
