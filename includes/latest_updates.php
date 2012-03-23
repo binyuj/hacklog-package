@@ -42,7 +42,8 @@ function ihacklog_pkg_display_latest_updates($num=5,$interval_days = 7,$displayD
 	$interval = 3600 * 24 * $interval_days ;
 	$list =	ihacklog_pkg_get_latest_updates($num,$interval );
 	if (!empty($list)) {
-		echo '<div style="border-left: 0px dashed #D6C094; margin: 5px; padding: 3px; margin-bottom:0px; border: 1px dashed #00a0c6;-moz-border-radius: 10px;-khtml-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;">';
+		echo '<div style="border-left: 0px dashed #D6C094; margin: 5px; padding: 3px; border: 1px dashed #00a0c6;-moz-border-radius: 10px;-khtml-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;font-size:13px;">';
+		echo '<h2>最近更新</h2>';
 		foreach ($list as $obj) 
 		{
 			echo '<div class="post-modified">';
