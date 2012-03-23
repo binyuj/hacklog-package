@@ -9,6 +9,7 @@
  * @Description 增加显示近期修改的旧文章之调用函数 ihacklog_pkg_display_latest_updates
  * 用法：在index.php或其它列表页面调用 
  * ihacklog_pkg_display_latest_updates($num=5,$interval_days = 7,$displayDate=1,$timeformat = "jS F'Y");
+ * depend on function ihacklog_pkg_random_title_color()
  */
 
 if ( !defined( 'ABSPATH' ) ) 
@@ -49,7 +50,7 @@ function ihacklog_pkg_display_latest_updates($num=5,$interval_days = 7,$displayD
 			$permalink = get_permalink($idlink);
 ?>
 						<h2 class="post-title post-modified-<?php echo $obj->ID;?>">
-						<a class='latest-updates' style="border-bottom-width:0;" href="<?php echo $permalink;?>" title='<?php echo esc_attr($obj->post_title);?>'><?php echo hacklog_random_title_color( $obj->post_title, $obj->ID);?></a>
+						<a class='latest-updates' style="border-bottom-width:0;" href="<?php echo $permalink;?>" title='<?php echo esc_attr($obj->post_title);?>'><?php echo ihacklog_pkg_random_title_color( $obj->post_title, $obj->ID);?></a>
 <?php				
 			if ($displayDate == 1) 
 			{
