@@ -6,8 +6,6 @@
  * @link http://ihacklog.com 
  * @copyright Copyright (C) 2012 荒野无灯 
  * @license http://www.gnu.org/licenses/
- * @datetime Jan 24, 2012  9:35:29 PM
- * @version 1.0.5
  * @Description
   */
 
