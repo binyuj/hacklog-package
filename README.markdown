@@ -6,7 +6,7 @@
 * Tags: **hacklog,package,misc**
 * Requires at least: **3.3**
 * Tested up to: **3.3.1**
-* Stable tag: **v1.0.5**
+* Stable tag: **v1.0.7**
 
 ## 下载
 * [https://github.com/ihacklog/hacklog-package/downloads](https://github.com/ihacklog/hacklog-package/downloads)
