@@ -17,8 +17,8 @@ if ( !defined( 'ABSPATH' ) )
 { 
 	header( 'HTTP/1.1 403 Forbidden', true, 403 ); die ('Please do not load this page directly. Thanks!'); 
 }
-
-add_action('rss2_head','ihacklog_pkg_rss2_latest_updates',-99);
+//rss latest udpates feauture seems have some problem. disable it.
+//add_action('rss2_head','ihacklog_pkg_rss2_latest_updates',-99);
 
 
 function ihacklog_pkg_get_latest_updates_for_feed($num=5,$interval = 604800 ) 

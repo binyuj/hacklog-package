@@ -6,7 +6,7 @@
 * Tags: **hacklog,package,misc**
 * Requires at least: **3.3**
 * Tested up to: **3.3.1**
-* Stable tag: **v1.0.7**
+* Stable tag: **v1.0.8**
 
 ## 下载
 * [https://github.com/ihacklog/hacklog-package/downloads](https://github.com/ihacklog/hacklog-package/downloads)
@@ -86,6 +86,10 @@ will be added here future
 
 
 ## Changelog
+
+### 1.0.8
+* rss latest udpates feauture seems have some problem. disable it.
+
 ### 1.0.4
 * updated infinitescroll
 
