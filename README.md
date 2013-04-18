@@ -72,7 +72,7 @@ $GLOBALS['ihacklog_pkg_foo'] = array(
 
 ## Screenshots
 
-![后台截图](hacklog-package/raw/master/hacklog-package.png "Screenshot")
+![后台截图](hacklog-package.png "Screenshot")
 
 
 
