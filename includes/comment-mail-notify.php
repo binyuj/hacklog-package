@@ -33,17 +33,26 @@ $spam_confirmed = $comment->comment_approved;
 if ($parent_id != '' && $spam_confirmed != 'spam' && $notify == 1 ) {
 $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['HTTP_HOST'])); // e-mail 發出點, no-reply 可改為可用的 e-mail.
 $to = trim(get_comment($parent_id)->comment_author_email);
-$subject = '您在 [' . get_option("blogname") . '] 的留言有了新回复';
+$subject = '您在《' . get_the_title($comment->comment_post_ID) . '》-- [' . get_option("blogname") . '] 的评论有了回复';
 $message = '
-<div style="background-color:#eef2fa; border:1px solid #d8e3e8; color:#111; padding:0 15px; -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px;">
-<p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
-<p>您曾在《' . get_the_title($comment->comment_post_ID) . '》的留言:<br />
-' . trim(get_comment($parent_id)->comment_content) . '</p>
-<p>' . trim($comment->comment_author) . ' 给您的回复:<br />
-' . trim($comment->comment_content) . '<br /></p>
-<p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '"> 查看完整回复內容</a></p>
-<p>欢迎再度光临 <a href="' . get_option('home') . '">' . get_option('blogname') . '</a></p>
-<p>(此邮件由系统自动发出, 请勿回复.)</p>
+<div style="border: #666 1px solid; background-color: #fff; margin: 10px auto 0px; width: 702px; font-family: 微软雅黑, arial; color: #111; font-size: 12px;-moz-border-radius: 8px; -webkit-border-radius: 8px; -khtml-border-radius: 8px; border-radius: 8px;">
+    <div style="width: 100%; background: #666666; height: 60px; color: white; -moz-border-radius: 6px 6px 0 0; -webkit-border-radius: 6px 6px 0 0; -khtml-border-radius: 6px 6px 0 0; border-radius: 6px 6px 0 0"><span style="line-height: 60px; height: 60px; margin-left: 30px; font-size: 12px">您在 <a style="color: #00bbff; text-decoration: none" href="' . get_option('home') . '"  target="_blank">' . get_option('blogname') . '</a> 上的留言有回复啦！</span> 
+    </div>
+    <div style="margin: 0px auto; width: 90%">
+        <p><strong>' . trim(get_comment($parent_id)->comment_author) . '</strong>, 您好!</p>
+        <p>您曾在 [' . get_option("blogname") . '] 的文章 《' . get_the_title($comment->comment_post_ID) . '》 上的发表评论:</p>
+        <p style="border-radius: 4px; padding: 20px; border: #ddd 1px solid; background-color: #eee; margin: 15px 0px;">'. trim(get_comment($parent_id)->comment_content) . '</p>
+        <p><strong>' . trim($comment->comment_author) . ' </strong>给您的回复如下:
+            <br />
+            <p style="border-radius: 4px; padding: 20px; border: #ddd 1px solid; background-color: #eee; margin: 15px 0px;">' . trim($comment->comment_content) . '
+                <br />
+            </p>
+            <p>您可以点击 <a style="color: #00bbff; text-decoration: none" href="' . htmlspecialchars(get_comment_link($parent_id)) . '" target="_blank">查看回复完整內容</a>
+            </p>
+            <p>欢迎再度光临 <a style="color: #00bbff; text-decoration: none" href="' . get_option('home') . '" target="_blank">' . get_option('blogname') . '</a>
+            </p>
+            <p>(此邮件由系统自动发送，请勿回复.)</p>
+    </div>
 </div>';
 $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
 $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
